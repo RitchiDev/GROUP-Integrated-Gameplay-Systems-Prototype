@@ -6,7 +6,15 @@ using UnityEngine;
 public enum EventType
 {
     KEY_PRESSED = 0,
-    MOUSE_CLICKED = 1
+    MOUSE_CLICKED = 1,
+
+    // Leveling events
+    EXP_GAINED = 2,
+    EXP_LEVELUP = 3,
+
+    // Upgrade events
+    UPGRADE_AQCUIRED = 4,
+
 }
 public static class EventSystem
 {
