@@ -36,7 +36,7 @@ public class Upgrade : ScriptableObject
         newModifier = new SpeedStatDecorator(newModifier, speedChange/100);
         newModifier = new CooldownStatDecorator(newModifier, cooldownChange/100);
         newModifier = new ExperienceStatDecorator(newModifier, experienceBoostChange/100);
-        newModifier = new ElementStatDecorator(newModifier, elementChange);
+        if(elementChange != Elements.NONE) { newModifier = new ElementStatDecorator(newModifier, elementChange); }
 
         //Debug.Log("[Upgrade][Stats] newSpeed: " + newModifier.GetSpeedMod() + ", newStamina: " + newModifier.GetStaminaMod());
         return newModifier;

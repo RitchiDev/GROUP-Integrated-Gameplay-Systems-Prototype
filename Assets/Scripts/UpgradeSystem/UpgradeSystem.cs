@@ -135,13 +135,13 @@ public class UpgradeSystem : GameBehaviour
 
     private void OnLevelUp(LevelUpData _data)
     {
-        Debug.Log(_data.target);
-        Debug.Log(_data.newLevel);
-        Debug.Log(_data.currentLevel);
+        Debug.Log($"target: {_data.target}");
+        Debug.Log($"newLevel: {_data.newLevel}");
+        Debug.Log($"currentLevel:{_data.currentLevel}");
 
         int count = _data.newLevel - _data.currentLevel;
 
-        //xpBar.GetComponentInChildren<TextMeshProUGUI>().text = "lv:" + _data.newLevel.ToString();
+        levelText.text = "lv:" + _data.newLevel.ToString();
 
         Debug.Log(count);
 
@@ -161,8 +161,7 @@ public class UpgradeSystem : GameBehaviour
         foreach (Button option in optionButtons)
         {
             // choose a random upgrade
-            int randomIndex = Random.Range(0, possibleUpgrades.Length);
-            Upgrade newUpgrade = possibleUpgrades[randomIndex];
+            Upgrade newUpgrade = UpgradeList.Instance.GetUpgrade();
 
             // update visuals
             //TextMeshProUGUI textMesh = option.gameObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -196,5 +195,7 @@ public class UpgradeSystem : GameBehaviour
 
         // if queue is not empty offer new choice
         if (choices.Count > 0) { OfferChoice(choices.Peek()); }
+        else { upgradeChoice.gameObject.SetActive(false); }
+
     }
 }

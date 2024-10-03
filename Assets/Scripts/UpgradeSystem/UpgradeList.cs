@@ -31,4 +31,12 @@ public class UpgradeList : GameBehaviour
         Debug.LogWarning($"Could not find upgrade with name: {_name} ");
         return null;
     }
+
+    public Upgrade GetUpgrade()
+    {
+        int randomIndex = Random.Range(0, upgrades.Length);
+        Upgrade newUpgrade = upgrades[randomIndex];
+
+        return newUpgrade;
+    }
 }
