@@ -6,7 +6,8 @@ using UnityEngine;
 public enum EventType
 {
     KEY_PRESSED = 0,
-    MOUSE_CLICKED = 1
+    MOUSE_CLICKED = 1,
+    MOUSE_CLICKED_POS = 2
 }
 public static class EventSystem
 {
