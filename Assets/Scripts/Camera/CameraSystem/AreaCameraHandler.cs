@@ -165,7 +165,7 @@ namespace CameraSystem
         {
             if (cameraTransform == null)
             {
-                Debug.LogWarning("no Camera transform has been assigned!");
+                //Debug.LogWarning("no Camera transform has been assigned!");
                 return;
             }
 

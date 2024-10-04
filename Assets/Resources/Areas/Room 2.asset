@@ -16,7 +16,7 @@ MonoBehaviour:
   cameraSize: 7
   minimumBoundary: {x: 10, y: -9, z: 0}
   maximumBoundary: {x: 26, y: 6, z: 0}
-  isIgnoringActiveScenes: 1
+  isIgnoringActiveScenes: 0
   labelColor: {r: 1, g: 1, b: 1, a: 1}
   areaColor: {r: 1, g: 1, b: 1, a: 1}
   scenesActiveIn: 01000000
