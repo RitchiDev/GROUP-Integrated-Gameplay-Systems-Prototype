@@ -17,7 +17,7 @@ public abstract class AQuest : IQuest
 
     public virtual void Start()
     {
-
+        state = QuestState.STARTED;
     }
 
     public virtual void Update()
@@ -27,7 +27,7 @@ public abstract class AQuest : IQuest
 
     public virtual void End()
     {
-
+        
     }
 
     public abstract string GetQuestString();
