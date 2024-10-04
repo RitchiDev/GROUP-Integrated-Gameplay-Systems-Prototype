@@ -9,11 +9,12 @@ public enum EventType
     MOUSE_CLICKED = 1,
 
     // Leveling events
-    EXP_GAINED = 2,
-    EXP_LEVELUP = 3,
+    EXP_GIVE = 2,
+    EXP_GAINED = 3,
+    EXP_LEVELUP = 4,
 
     // Upgrade events
-    UPGRADE_AQCUIRED = 4,
+    UPGRADE_AQCUIRED = 5,
 }
 public static class EventSystem
 {

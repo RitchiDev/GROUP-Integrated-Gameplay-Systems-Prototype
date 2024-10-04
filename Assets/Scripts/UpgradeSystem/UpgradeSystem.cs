@@ -115,9 +115,7 @@ public class UpgradeSystem : GameBehaviour
 
     private void OnExpGained(ExperienceData _data)
     {
-        Debug.Log("[UpgradeSystem] On exp gained");
-
-        float fillAmount = (_data.currentExp % _data.neededExp) / _data.neededExp;
+        float fillAmount = Mathf.InverseLerp(_data.neededExp, _data.nextNeededExp, _data.currentExp);
         expFill.fillAmount = fillAmount;
     }
 

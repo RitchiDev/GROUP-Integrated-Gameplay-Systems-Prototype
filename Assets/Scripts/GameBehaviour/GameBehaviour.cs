@@ -17,6 +17,9 @@ public class GameBehaviour : IGameBehaviour
     public virtual void Update() { }
 
     public virtual void FixedUpdate() { }
+
+    public virtual void LateUpdate() { }
+
     protected void Dispose()
     {
         OnDispose?.Invoke(this);
@@ -26,4 +29,5 @@ public class GameBehaviour : IGameBehaviour
     }
 
     public virtual void OnDestroy() { }
+
 }
