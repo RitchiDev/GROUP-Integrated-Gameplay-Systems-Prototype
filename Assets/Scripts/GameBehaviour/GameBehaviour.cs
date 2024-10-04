@@ -21,6 +21,8 @@ public class GameBehaviour : IGameBehaviour
     {
         OnDispose?.Invoke(this);
         OnDispose = null;
+
+        OnDestroy();
     }
 
     public virtual void OnDestroy() { }

@@ -26,12 +26,12 @@ public class MousePressQuest : AQuest
 
     public override void Start()
     {
-        EventSystem<int>.AddListener(EventType.MOUSE_CLICKED, MouseClicked);
+        EventSystem<MouseClickEvent>.AddListener(EventType.MOUSE_CLICKED, MouseClicked);
     }
 
-    private void MouseClicked(int _mouseBtn)
+    private void MouseClicked(MouseClickEvent _mouseEvent)
     {
-        if (_mouseBtn == mouseButton)
+        if (_mouseEvent.button == mouseButton)
         {
             clickedCount++;
 
@@ -46,6 +46,6 @@ public class MousePressQuest : AQuest
 
     public override void End()
     {
-        EventSystem<int>.RemoveListener(EventType.MOUSE_CLICKED, MouseClicked);
+        EventSystem<MouseClickEvent>.RemoveListener(EventType.MOUSE_CLICKED, MouseClicked);
     }
 }
