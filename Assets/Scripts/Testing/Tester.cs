@@ -26,6 +26,6 @@ public class Tester : GameBehaviour
         if (Input.GetMouseButtonDown(1)) EventSystem<int>.InvokeEvent(EventType.MOUSE_CLICKED, 1);
         if (Input.GetMouseButtonDown(2)) EventSystem<int>.InvokeEvent(EventType.MOUSE_CLICKED, 2);
 
-        if(Input.GetKeyDown(KeyCode.P)) new DummyEnemy(new Vector2(8, 2));
+        if(Input.GetKeyDown(KeyCode.L)) new DummyEnemy(new Vector2(8, 2));
     }
 }
