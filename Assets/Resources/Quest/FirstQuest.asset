@@ -17,3 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 45315967b743be64bbda592518958d4d, type: 2}
   nextQuest:
   - {fileID: 11400000, guid: a84bade083e04a5428dd0d064f320e14, type: 2}
+  questName: First Quest
+  xpOnComplete: 25

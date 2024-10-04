@@ -9,4 +9,5 @@ public interface ILeveling
     public void AddExperience(float _experience);
     public void RemoveExperience(float _experience);
     public void LevelUp(int _level);
+    public void RemoveListeners();
 }

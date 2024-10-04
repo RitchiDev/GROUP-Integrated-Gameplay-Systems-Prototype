@@ -22,6 +22,7 @@ public class KeyPressQuest : AQuest
 
     public override void Start()
     {
+        base.Start();
         EventSystem<KeyCode>.AddListener(EventType.KEY_PRESSED, KeyPressed);
     }
 

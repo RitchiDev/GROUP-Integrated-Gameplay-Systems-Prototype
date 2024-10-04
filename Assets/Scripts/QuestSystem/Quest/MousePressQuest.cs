@@ -26,6 +26,7 @@ public class MousePressQuest : AQuest
 
     public override void Start()
     {
+        base.Start();
         EventSystem<int>.AddListener(EventType.MOUSE_CLICKED, MouseClicked);
     }
 

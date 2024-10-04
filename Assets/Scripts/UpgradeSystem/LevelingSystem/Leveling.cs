@@ -20,6 +20,13 @@ public class Leveling : ILeveling
         this.currentLevel = 0;
 
         expNeeded = _expNeeded;
+
+        EventSystem<float>.AddListener(EventType.EXP_GIVE, AddExperience);
+    }
+
+    public void RemoveListeners()
+    {
+        EventSystem<float>.RemoveListener(EventType.EXP_GIVE, AddExperience);
     }
 
     public float GetCurrentExp()
@@ -32,13 +39,39 @@ public class Leveling : ILeveling
         return currentLevel;
     }
 
+    private int GetTotalExperienceNeeded(int _n)
+    {
+        int value = 0;
+        for (int i = 0; i <= _n - 1; i++)
+        {
+            value = value + 50 + 25 * i;
+        }
+        return value;
+    }
+
     public void AddExperience(float _experience)
     {
-        currentExp += _experience * owner.GetStats().GetExperienceBoost();
-        
-        EventSystem<ExperienceData>.InvokeEvent(EventType.EXP_GAINED, new ExperienceData(owner, currentExp, expNeeded));
+        currentExp += _experience * owner.GetStats().GetExperienceBoost();  // het totale hoeveelheid exp
 
-        int newLevel = (int)(currentExp / expNeeded);
+        // get newlevel by looping
+        //int newLevel = currentLevel;
+        //while(GetExperienceNeeded(newLevel) < currentExp)
+        //{
+        //    newLevel++;
+        //}
+
+        //if(GetExperienceNeeded(newLevel) > currentExp)
+        //{
+        //    newLevel--;
+        //}
+
+        // or single function - Credits to my brother
+        int newLevel = Mathf.FloorToInt((-37.5f + Mathf.Sqrt(1406.25f + (50f * currentExp))) / 25);
+
+        Debug.Log("[Experience] New level: " +  newLevel);
+        //int newLevel = (int)(currentExp / expNeeded);
+
+        EventSystem<ExperienceData>.InvokeEvent(EventType.EXP_GAINED, new ExperienceData(owner, currentExp, GetTotalExperienceNeeded(newLevel + 1), GetTotalExperienceNeeded(newLevel)));
 
         if (currentLevel < newLevel)
         {
