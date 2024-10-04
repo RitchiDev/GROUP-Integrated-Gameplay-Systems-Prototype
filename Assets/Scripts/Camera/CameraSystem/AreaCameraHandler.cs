@@ -67,7 +67,7 @@ namespace CameraSystem
 
             SetUpAreas();
 
-            targetToTrack = null;
+            SetUpTarget();
         }
 
         private void CreateCamera()
@@ -101,6 +101,11 @@ namespace CameraSystem
 
                 changeAreaDictionary.Add(iteratedArea, () => ChangeArea(iteratedArea));
             }
+        }
+
+        private void SetUpTarget()
+        {
+            targetToTrack = null;
         }
 
         /// <summary>
