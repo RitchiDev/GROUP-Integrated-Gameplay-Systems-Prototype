@@ -53,7 +53,7 @@ public static class QuestFactory
             quests.Add(CreateQuest(questTypes[Random.Range(0, questTypes.Length)]));
         }
 
-        return new QuestList(quests, new QuestDisplay(), null);
+        return new QuestList(quests, new QuestDisplay(), null, Random.Range(5, 21));
     }
 
     private static IQuest CreateQuest(QuestType _rndQuest)

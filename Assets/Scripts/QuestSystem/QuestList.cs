@@ -10,17 +10,19 @@ public class QuestList
     private List<IQuest> quests;
     private IQuest currentQuest;
     private int questIndex;
+    private int xpOnComplete;
 
     private IQuestDisplay messenger;
     public QuestListData[] NextQuest { private set; get; }
 
     public event Action<QuestList> QuestComplete;
 
-    public QuestList(List<IQuest> _quest, IQuestDisplay _messenger, QuestListData[] _nextQuest)
+    public QuestList(List<IQuest> _quest, IQuestDisplay _messenger, QuestListData[] _nextQuest, int _xpOnComplete)
     {
         quests = _quest;
         messenger = _messenger;
         NextQuest = _nextQuest;
+        xpOnComplete = _xpOnComplete;
     }
 
     public void StartQuest()
@@ -32,6 +34,7 @@ public class QuestList
         {
             totalQuestDisplay += quests[i].GetQuestString() + "\n";
         }
+        totalQuestDisplay += $"\n{xpOnComplete}";
         messenger?.Init(totalQuestDisplay);
         //messenger?.UpdateText(totalQuestDisplay);
 
@@ -53,6 +56,7 @@ public class QuestList
         {
             QuestState = QuestState.COMPLETED;
             messenger?.UpdateText("Quest Completed: " + questIndex + "/" + quests.Count);
+            //Waiting for xp event.
             QuestComplete?.Invoke(this);
             QuestComplete = null;
             messenger?.End();
