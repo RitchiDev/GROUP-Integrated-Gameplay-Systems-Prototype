@@ -6,10 +6,10 @@ public class DamageStatDecorator : StatDecorator
 {
     private float change;
 
-    public DamageStatDecorator(IStatModifier statModifier, float change)
+    public DamageStatDecorator(IStatModifier _statModifier, float _change)
     {
-        this.statModifier = statModifier;
-        this.change = change;
+        statModifier = _statModifier;
+        change = _change;
     }
 
     public override float GetDamageMod()

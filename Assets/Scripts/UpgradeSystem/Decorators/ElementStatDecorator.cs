@@ -6,10 +6,10 @@ public class ElementStatDecorator : StatDecorator
 {
     private Elements newElement;
 
-    public ElementStatDecorator(IStatModifier statModifier, Elements newElement)
+    public ElementStatDecorator(IStatModifier _statModifier, Elements _newElement)
     {
-        this.statModifier = statModifier;
-        this.newElement = newElement;
+        statModifier = _statModifier;
+        newElement = _newElement;
     }
 
     public override Elements GetElementMod()

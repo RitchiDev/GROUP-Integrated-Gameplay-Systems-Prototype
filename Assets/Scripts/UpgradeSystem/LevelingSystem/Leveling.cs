@@ -10,16 +10,16 @@ public class Leveling : ILeveling
     private float currentExp;
     private int currentLevel = 0;
 
-    private float expNeeded;    // the amount of exp needed to level up each level (Could make this get higher, when level gets higher)
+    private float expNeeded;    // the amount of exp needed to level up each level (Could make this get higher, when level gets higher with animation curve)
 
-    public Leveling(IStatHolder owner, float expNeeded = 50f)
+    public Leveling(IStatHolder _owner, float _expNeeded = 50f)
     {
-        this.owner = owner;
+        owner = _owner;
 
         this.currentExp = 0;
         this.currentLevel = 0;
 
-        this.expNeeded = expNeeded;
+        expNeeded = _expNeeded;
     }
 
     public float GetCurrentExp()
@@ -32,9 +32,9 @@ public class Leveling : ILeveling
         return currentLevel;
     }
 
-    public void AddExperience(float experience)
+    public void AddExperience(float _experience)
     {
-        currentExp += experience * owner.GetStats().GetExperienceBoost();
+        currentExp += _experience * owner.GetStats().GetExperienceBoost();
         
         EventSystem<ExperienceData>.InvokeEvent(EventType.EXP_GAINED, new ExperienceData(owner, currentExp, expNeeded));
 
@@ -47,23 +47,23 @@ public class Leveling : ILeveling
 
         Debug.Log("[Leveling] Adding experience ---------------- ");
         Debug.Log("[Leveling] new Exp: " + currentExp);
-        Debug.Log("[Leveling] added Exp: " + experience * owner.GetStats().GetExperienceBoost());
+        Debug.Log("[Leveling] added Exp: " + _experience * owner.GetStats().GetExperienceBoost());
         Debug.Log("[Leveling] ----------------------------------");
     }
 
     // remove exp (Can not go down a level)
-    public void RemoveExperience(float experience)
+    public void RemoveExperience(float _experience)
     {
-        currentExp -= experience;
+        currentExp -= _experience;
 
         if(currentExp < 0) { currentExp = 0; }
     }
 
-    public void LevelUp(int newLevel)
+    public void LevelUp(int _newLevel)
     {
-        EventSystem<LevelUpData>.InvokeEvent(EventType.EXP_LEVELUP , new LevelUpData(owner, newLevel, currentLevel));
-        Debug.Log("[Leveling] Leveling up! lv: " + newLevel);
+        EventSystem<LevelUpData>.InvokeEvent(EventType.EXP_LEVELUP , new LevelUpData(owner, _newLevel, currentLevel));
+        Debug.Log("[Leveling] Leveling up! lv: " + _newLevel);
 
-        currentLevel = newLevel;
+        currentLevel = _newLevel;
     }
 }

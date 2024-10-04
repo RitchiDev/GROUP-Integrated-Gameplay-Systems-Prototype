@@ -6,10 +6,10 @@ public class CooldownStatDecorator : StatDecorator
 {
     private float change;
 
-    public CooldownStatDecorator(IStatModifier statModifier, float change)
+    public CooldownStatDecorator(IStatModifier _statModifier, float _change)
     {
-        this.statModifier = statModifier;
-        this.change = change;
+        statModifier = _statModifier;
+        change = _change;
     }
 
     public override float GetCooldownMod()

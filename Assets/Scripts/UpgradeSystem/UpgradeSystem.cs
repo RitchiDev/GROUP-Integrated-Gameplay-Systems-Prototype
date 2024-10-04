@@ -20,18 +20,6 @@ public class UpgradeSystem : GameBehaviour
 
     private Queue<IStatHolder> choices;
 
-    //public UpgradeSystem(Upgrade[] possibleUpgrades, GameObject upgradeUI)
-    //{
-    //    this.possibleUpgrades = possibleUpgrades;
-    //    this.upgradeUI = GameObject.Instantiate(upgradeUI);
-    //    Debug.Log("[UpgradeSystem] UpgradeUI: " + this.upgradeUI);
-    //    ChoiceUISetup();
-
-    //    // add listeners
-    //    EventSystem<ExperienceData>.AddListener(EventType.EXP_GAINED, OnExpGained);
-    //    EventSystem<LevelUpData>.AddListener(EventType.EXP_LEVELUP, OnLevelUp);
-    //}
-
     public override void Awake()
     {
         // get all Upgrade ScriptableObjects to store in possibleUpgrades
@@ -154,7 +142,7 @@ public class UpgradeSystem : GameBehaviour
         OfferChoice(choices.Peek());
     }
 
-    private void OfferChoice(IStatHolder target)
+    private void OfferChoice(IStatHolder _target)
     {
         upgradeChoice.gameObject.SetActive(true);
 
@@ -164,8 +152,6 @@ public class UpgradeSystem : GameBehaviour
             Upgrade newUpgrade = UpgradeList.Instance.GetUpgrade();
 
             // update visuals
-            //TextMeshProUGUI textMesh = option.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-
             string upgradeText = "";
             if(newUpgrade.damageChange != 0) { upgradeText = upgradeText + "Damage: +" + newUpgrade.damageChange.ToString() + "% <br>" ; }
             if(newUpgrade.healthChange != 0) { upgradeText = upgradeText + "Health: +" + newUpgrade.healthChange.ToString() + "% <br>" ; }
@@ -181,12 +167,12 @@ public class UpgradeSystem : GameBehaviour
         }
     }
 
-    private void ApplyChoice(Upgrade chosenUpgrade)
+    private void ApplyChoice(Upgrade _chosenUpgrade)
     {
         choices.Dequeue();
 
         // TODO eventsystem
-        EventSystem<Upgrade>.InvokeEvent(EventType.UPGRADE_AQCUIRED, chosenUpgrade);
+        EventSystem<Upgrade>.InvokeEvent(EventType.UPGRADE_AQCUIRED, _chosenUpgrade);
 
         foreach(Button option in optionButtons)
         {

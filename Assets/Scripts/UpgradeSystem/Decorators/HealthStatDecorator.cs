@@ -6,10 +6,10 @@ public class HealthStatDecorator : StatDecorator
 {
     private float change;
 
-    public HealthStatDecorator(IStatModifier statModifier, float change)
+    public HealthStatDecorator(IStatModifier _statModifier, float _change)
     {
-        this.statModifier = statModifier;
-        this.change = change;
+        statModifier = _statModifier;
+        change = _change;
     }
 
     public override float GetHealthMod()

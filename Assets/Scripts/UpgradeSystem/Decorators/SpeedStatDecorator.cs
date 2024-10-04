@@ -6,11 +6,10 @@ public class SpeedStatDecorator : StatDecorator
 {
     private float change; // in factor (i.e. 20% -> 0.2)
 
-    public SpeedStatDecorator(IStatModifier statModifier, float change)
+    public SpeedStatDecorator(IStatModifier _statModifier, float _change)
     {
-        this.statModifier = statModifier;
-        this.change = change;
-        Debug.Log("[Upgrade][Stats] Change: " + change);
+        statModifier = _statModifier;
+        change = _change;
     }
 
     public override float GetSpeedMod()

@@ -7,9 +7,9 @@ public class StaminaStatDecorator : StatDecorator
 {
     private float change;
 
-    public StaminaStatDecorator(IStatModifier statModifier, float change)
+    public StaminaStatDecorator(IStatModifier _statModifier, float _change)
     {
-        this.statModifier = statModifier;
-        this.change = change;
+        statModifier = _statModifier;
+        change = _change;
     }
 }

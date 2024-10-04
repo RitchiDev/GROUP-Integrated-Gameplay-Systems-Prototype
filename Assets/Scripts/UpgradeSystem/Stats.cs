@@ -16,19 +16,19 @@ public class Stats
     private float cooldown;
     private Elements element;
 
-    public Stats(float damage, float health, float speed, float cooldown , Elements element)
+    public Stats(float _damage, float _health, float _speed, float _cooldown , Elements _element)
     {
         EventSystem<Upgrade>.AddListener(EventType.UPGRADE_AQCUIRED, ApplyModifier);
 
         // create stat modifiers without any decorators (with default values)
         statModifier = new StatModifier();
 
-        // set base values which can differ between stat bearers
-        this.damage = damage;
-        this.health = health;
-        this.speed = speed;
-        this.cooldown = cooldown;
-        this.element = element;
+        // set base values which can differ between stat holders
+        damage = _damage;
+        health = _health;
+        speed = _speed;
+        cooldown = _cooldown;
+        element = _element;
     }
 
     // call this when player is disabled/destroyed
@@ -49,11 +49,11 @@ public class Stats
 
     public Elements GetElement() { return statModifier.GetElementMod(); }
 
-    private void ApplyModifier(Upgrade upgrade)
+    private void ApplyModifier(Upgrade _upgrade)
     {
-        statModifier = upgrade.CreateStatModifier(statModifier);
+        statModifier = _upgrade.CreateStatModifier(statModifier);
         
-        Debug.Log("[Stats] upgrade applied: " + upgrade.name);
+        Debug.Log("[Stats] upgrade applied: " + _upgrade.name);
         //Debug.Log("[Stats] " + GetSpeed());
     }
 }

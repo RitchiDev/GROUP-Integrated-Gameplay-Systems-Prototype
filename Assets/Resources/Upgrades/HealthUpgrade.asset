@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4718ae8ed9e97e546a1d6e1c1b706a61, type: 3}
   m_Name: HealthUpgrade
   m_EditorClassIdentifier: 
-  UpgradeName: Mega_Health
+  upgradeName: Mega_Health
   damageChange: 0
   healthChange: 100
   speedChange: 0

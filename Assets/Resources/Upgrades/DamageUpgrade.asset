@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4718ae8ed9e97e546a1d6e1c1b706a61, type: 3}
   m_Name: DamageUpgrade
   m_EditorClassIdentifier: 
-  UpgradeName: Mixed_DamageCooldown
+  upgradeName: Mixed_DamageCooldown
   damageChange: 50
   healthChange: 0
   speedChange: 0

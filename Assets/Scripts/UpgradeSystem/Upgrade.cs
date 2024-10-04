@@ -6,7 +6,7 @@ using UnityEngine;
 public class Upgrade : ScriptableObject
 {
     [Header("identification")]
-    public string UpgradeName;
+    public string upgradeName;
 
     [Header("Upgrade values (in percentages)")]
     [Range(-100,500)]
@@ -21,24 +21,18 @@ public class Upgrade : ScriptableObject
     public float experienceBoostChange;
     public Elements elementChange;
 
-    // create and return a new statmodifier by wrapping decorators around the given statmodifier
-    public IStatModifier CreateStatModifier(IStatModifier baseStatModifier)
+    // create and return a new statmodifier by wrapping decorators around the given statmodifier - Factory pattern(?)
+    public IStatModifier CreateStatModifier(IStatModifier _baseStatModifier)
     {
-        //Debug.Log("[Upgrade][Stats] base Speed: " + baseStatModifier.GetSpeedMod() + ", base Stamina: " + baseStatModifier.GetStaminaMod());
-
-        // TODO - optimize this to list of all decorator types, then use for loop
-
         // apply the specified changes to all used stat mods
-        IStatModifier newModifier = baseStatModifier;
+        IStatModifier newModifier = _baseStatModifier;
         newModifier = new DamageStatDecorator(newModifier, damageChange/100);
         newModifier = new HealthStatDecorator(newModifier, healthChange/100);
-        //Debug.Log("[Upgrade][Stats] speed Change: " + speedChange);
         newModifier = new SpeedStatDecorator(newModifier, speedChange/100);
         newModifier = new CooldownStatDecorator(newModifier, cooldownChange/100);
         newModifier = new ExperienceStatDecorator(newModifier, experienceBoostChange/100);
         if(elementChange != Elements.NONE) { newModifier = new ElementStatDecorator(newModifier, elementChange); }
 
-        //Debug.Log("[Upgrade][Stats] newSpeed: " + newModifier.GetSpeedMod() + ", newStamina: " + newModifier.GetStaminaMod());
         return newModifier;
     }
 }

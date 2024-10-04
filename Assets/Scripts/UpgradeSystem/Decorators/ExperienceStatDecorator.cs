@@ -6,10 +6,10 @@ public class ExperienceStatDecorator : StatDecorator
 {
     private float change;
 
-    public ExperienceStatDecorator(IStatModifier statModifier, float change)
+    public ExperienceStatDecorator(IStatModifier _statModifier, float _change)
     {
-        this.statModifier = statModifier;
-        this.change = change;
+        statModifier = _statModifier;
+        change = _change;
     }
 
     public override float GetExperienceMod()
