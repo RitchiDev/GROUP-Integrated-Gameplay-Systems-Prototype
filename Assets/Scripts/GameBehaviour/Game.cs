@@ -20,7 +20,6 @@ public class Game
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void InitGame()
     {
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneIndexes.MENU)
         {
             gameBehaviours = new List<IGameBehaviour>();
