@@ -49,6 +49,8 @@ public class Player : GameBehaviour
     {
         GameObject playerPrefab = Resources.Load<GameObject>(PREFAB_NAME);
         GameObject player = GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        player.name = PREFAB_NAME;
+
         rigidBody = player.GetComponent<Rigidbody2D>();
     }
 
