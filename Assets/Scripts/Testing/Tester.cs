@@ -25,11 +25,7 @@ public class Tester : GameBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            // EventSystem<Vector2>.InvokeEvent(EventType.MOUSE_CLICKED_POS, Input.mousePosition);
-            EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(0, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
-        }
+        if (Input.GetMouseButtonDown(0))  EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(0, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
         if (Input.GetMouseButtonDown(1)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(1, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
         if (Input.GetMouseButtonDown(2)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(2, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
 
