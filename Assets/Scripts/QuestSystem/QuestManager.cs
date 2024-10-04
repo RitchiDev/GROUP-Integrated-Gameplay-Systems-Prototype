@@ -27,7 +27,7 @@ public class QuestManager : GameBehaviour
 
     private QuestList GetNewQuest()
     {
-        int questLength = Mathf.Max(Random.Range(1, 6) - 2, 1);
+        int questLength = Mathf.Max(Random.Range(1, 6) - 1, 1);
 
         return QuestFactory.CreateQuest(questLength);
     }
