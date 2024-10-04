@@ -20,6 +20,13 @@ public class Leveling : ILeveling
         this.currentLevel = 0;
 
         expNeeded = _expNeeded;
+
+        EventSystem<float>.AddListener(EventType.EXP_GIVE, AddExperience);
+    }
+
+    public void RemoveListeners()
+    {
+        EventSystem<float>.RemoveListener(EventType.EXP_GIVE, AddExperience);
     }
 
     public float GetCurrentExp()
