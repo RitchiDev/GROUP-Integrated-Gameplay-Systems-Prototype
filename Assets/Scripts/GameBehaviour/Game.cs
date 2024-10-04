@@ -5,6 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public enum SceneIndexes : int
+{
+    MENU = 0,
+    GAME = 1,
+}
 
 public class Game
 {
@@ -13,26 +20,33 @@ public class Game
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void InitGame()
     {
-        gameBehaviours = new List<IGameBehaviour>();
-        
-        IEnumerable<Type> behaviours = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(GameBehaviour)));
-
-        foreach (Type behaviour in behaviours)
+        if (SceneManager.GetActiveScene().buildIndex != (int)SceneIndexes.MENU)
         {
-            IGameBehaviour gB = (GameBehaviour)Activator.CreateInstance(behaviour);
+            gameBehaviours = new List<IGameBehaviour>();
 
-            gameBehaviours.Add(gB);
-            gB.OnDispose += BehaviourDisposed;
+            IEnumerable<Type> behaviours = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(GameBehaviour)));
+
+            foreach (Type behaviour in behaviours)
+            {
+                IGameBehaviour gB = (GameBehaviour)Activator.CreateInstance(behaviour);
+
+                gameBehaviours.Add(gB);
+                gB.OnDispose += BehaviourDisposed;
+            }
+
+            //Awake before start.
+            gameBehaviours.ForEach(gB => gB.Awake());
+
+            //Start after awake.
+            gameBehaviours.ForEach(gB => gB.Start());
+
+            UpdateLoop();
+            FixedUpdateLoop();
         }
-
-        //Awake before start.
-        gameBehaviours.ForEach(gb => gb.Awake());  
-
-        //Start after awake.
-        gameBehaviours.ForEach(gB => gB.Start());
-
-        UpdateLoop();
-        FixedUpdateLoop();
+        else
+        {
+            new Menu().SceneChange += InitGame;
+        }
     }
 
     private static async void UpdateLoop()
@@ -41,10 +55,10 @@ public class Game
         {
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
 
-            //Makes a copy of the list to ensure nog edits will ocure during the loop.
+            //Makes a copy of the list to ensure no edits will ocure during the loop.
             List<IGameBehaviour> copyBehaviour = gameBehaviours.ToList();
-            copyBehaviour.ForEach(gb => gb.Update());
-            copyBehaviour.ForEach(gb => gb.LateUpdate());
+            copyBehaviour.ForEach(gB => gB.Update());
+            copyBehaviour.ForEach(gB => gB.LateUpdate());
         }
     }
 
@@ -56,9 +70,9 @@ public class Game
         {
             await Task.Delay(fixedDelay);
 
-            //Makes a copy of the list to ensure nog edits will ocure during the loop.
+            //Makes a copy of the list to ensure no edits will ocure during the loop.
             List<IGameBehaviour> copyBehaviour = gameBehaviours.ToList();
-            copyBehaviour.ForEach(gb => gb.FixedUpdate());
+            copyBehaviour.ForEach(gB => gB.FixedUpdate());
         }
     }
 

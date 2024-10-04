@@ -27,8 +27,13 @@ namespace PlaceHolder
 
         public override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.O)) { Leveling.AddExperience(50f); }
+            if (Input.GetKeyDown(KeyCode.O)) { EventSystem<float>.InvokeEvent(EventType.EXP_GIVE, 50f); }
             if (Input.GetKeyDown(KeyCode.P)) { DebugModifiedStats(); }
+        }
+
+        public override void OnDestroy()
+        {
+            Leveling.RemoveListeners();
         }
 
         public Stats GetStats()

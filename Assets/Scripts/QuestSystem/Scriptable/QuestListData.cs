@@ -8,6 +8,9 @@ public class QuestListData : ScriptableObject
     public List<QuestData> questOrder;
     public QuestListData[] nextQuest;
 
+    public string questName;
+    public int xpOnComplete;
+
     public QuestList CreateQuestList()
     {
         List<IQuest> quest = new List<IQuest>();
@@ -17,6 +20,6 @@ public class QuestListData : ScriptableObject
             quest.Add(questOrder[i].ConvertQuest());
         }
 
-        return new QuestList(quest, new QuestDisplay(), nextQuest);
+        return new QuestList(quest, new QuestDisplay(), nextQuest, xpOnComplete, questName);
     }
 }

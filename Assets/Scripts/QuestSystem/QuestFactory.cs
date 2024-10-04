@@ -46,14 +46,16 @@ public static class QuestFactory
     public static QuestList CreateQuest(int _questLength)
     {
         List<IQuest> quests = new List<IQuest>();
+        int xpReward = 0;
 
         QuestType[] questTypes = (QuestType[])System.Enum.GetValues(typeof(QuestType));
         for (int i = 0; i < _questLength; i++)
         {
             quests.Add(CreateQuest(questTypes[Random.Range(0, questTypes.Length)]));
+            xpReward += Random.Range(5, 14);
         }
 
-        return new QuestList(quests, new QuestDisplay(), null);
+        return new QuestList(quests, new QuestDisplay(), null, xpReward, "Quest");
     }
 
     private static IQuest CreateQuest(QuestType _rndQuest)
@@ -61,9 +63,9 @@ public static class QuestFactory
         switch (_rndQuest)
         {
             case QuestType.RANDOM_KEYCODE:
-                return new KeyPressQuest(keys[Random.Range(0, keys.Length)], Random.Range(1, 11));
+                return new KeyPressQuest(keys[Random.Range(0, keys.Length)], Random.Range(2, 12));
             case QuestType.RANDOM_MOUSE_BUTTON:
-                return new MousePressQuest(Random.Range(0, 3), Random.Range(1, 11));
+                return new MousePressQuest(Random.Range(0, 3), Random.Range(2, 12));
             default:
                 Debug.LogError("Quest Type not found.");
                 return null;
