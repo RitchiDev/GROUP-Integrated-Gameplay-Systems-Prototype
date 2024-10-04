@@ -7,7 +7,14 @@ public enum EventType
 {
     KEY_PRESSED = 0,
     MOUSE_CLICKED = 1,
-    MOUSE_CLICKED_POS = 2
+    MOUSE_CLICKED_POS = 2,
+
+    // Leveling events
+    EXP_GAINED = 3,
+    EXP_LEVELUP = 4,
+
+    // Upgrade events
+    UPGRADE_AQCUIRED = 5,
 }
 public static class EventSystem
 {
