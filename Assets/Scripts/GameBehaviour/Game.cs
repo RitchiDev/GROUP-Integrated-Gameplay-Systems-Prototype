@@ -44,6 +44,7 @@ public class Game
             //Makes a copy of the list to ensure nog edits will ocure during the loop.
             List<IGameBehaviour> copyBehaviour = gameBehaviours.ToList();
             copyBehaviour.ForEach(gb => gb.Update());
+            copyBehaviour.ForEach(gb => gb.LateUpdate());
         }
     }
 
