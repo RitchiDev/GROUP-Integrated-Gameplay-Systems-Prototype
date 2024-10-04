@@ -56,7 +56,7 @@ public class QuestList
         {
             QuestState = QuestState.COMPLETED;
             messenger?.UpdateText("Quest Completed: " + questIndex + "/" + quests.Count);
-            //Waiting for xp event.
+            EventSystem<float>.InvokeEvent(EventType.EXP_GIVE, xpOnComplete);
             QuestComplete?.Invoke(this);
             QuestComplete = null;
             messenger?.End();
@@ -67,7 +67,7 @@ public class QuestList
             currentQuest.QuestCompleted += QuestCompleted;
             currentQuest.QuestUpdate += QuestUpdate;
             currentQuest.Start();
-            messenger?.UpdateText("Started: " + currentQuest.GetQuestString() + " " + questIndex + "/" + quests.Count);
+            messenger?.UpdateText($"Started: {currentQuest.GetQuestString()} \nReward: {xpOnComplete} XP | {questIndex} / {quests.Count}");
         }
     }
 
