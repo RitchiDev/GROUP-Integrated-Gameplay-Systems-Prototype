@@ -8,11 +8,12 @@ public class DummyEnemy : BaseEnemy
 
     private float health;
 
-    public DummyEnemy(Vector2 _position, float _health = 5)
+    public DummyEnemy(Vector2 _position, float _health = 3)
     {
         GameObject dummyObj = Resources.Load<GameObject>("Dummy");
         enemyObj = GameObject.Instantiate(dummyObj, _position, Quaternion.identity);
         health = _health;
+        deathXP = 5;
     }
 
     public override void Clicked(MouseClickEvent _mouseData)
@@ -29,14 +30,9 @@ public class DummyEnemy : BaseEnemy
     }
     public override void TakeDamage(float _damage)
     {
+        base.TakeDamage(_damage);
         health -= _damage;
         if (health <= 0) Die();
-    }
-
-    public override void Die()
-    {
-        //$$ TODO: Give player XP
-        Dispose();
     }
 
     public override void OnDestroy()

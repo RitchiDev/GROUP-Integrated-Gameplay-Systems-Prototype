@@ -14,6 +14,7 @@ public class EntityBehaviour : IGameBehaviour
     public virtual void Update() { }
 
     public virtual void FixedUpdate() { }
+    public void LateUpdate() { }
     protected void Dispose()
     {
         OnDispose?.Invoke(this);
@@ -22,4 +23,5 @@ public class EntityBehaviour : IGameBehaviour
     }
 
     public virtual void OnDestroy() { }
+
 }

@@ -8,7 +8,7 @@ public class Tester : GameBehaviour
 
     public override void Start()
     {
-        cam = Camera.main;
+        cam = GameObject.FindAnyObjectByType<Camera>();
     }
 
     //Testing script for simulating the game.
