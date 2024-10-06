@@ -20,6 +20,8 @@ namespace CameraSystem
         public float SmoothSpeed => smoothSpeed;
 
         [Header("Target")]
+        [SerializeField] private Vector3 followOffset = new Vector3(9, 3);
+        public Vector3 FollowOffset => followOffset;
         [SerializeField] private int trackTargetDelay = 1000;
         public int TrackTargetDelay => trackTargetDelay;
 

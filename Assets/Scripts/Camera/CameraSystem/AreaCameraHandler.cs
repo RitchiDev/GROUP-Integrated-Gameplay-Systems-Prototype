@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CameraState;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace CameraSystem
 {
@@ -18,10 +19,9 @@ namespace CameraSystem
         private const string DATA_NAME = "CameraData";
 
         [Header("Camera")]
-        [SerializeField] private Camera currentCamera;
-        [SerializeField] private Transform cameraTransform;
+        private Camera currentCamera;
+        private Transform cameraTransform;
         public Transform CameraTransform => cameraTransform;
-        [SerializeField] private Vector3 followOffset;
         private Dictionary<CameraArea, Action> changeAreaDictionary = new Dictionary<CameraArea, Action>();
         private Vector3 newCameraPosition;
         public Vector3 CurrentNewCameraPosition => newCameraPosition;
@@ -31,6 +31,7 @@ namespace CameraSystem
         public Transform Target => targetToTrack;
         private Vector3Int currentTargetPosition;
         private Vector3Int previousTargetPosition;
+        private const string PLAYER_NAME = "Player";
 
         [Header("Area")]
         private CameraArea currentArea;
@@ -79,6 +80,8 @@ namespace CameraSystem
             currentCamera = cameraObject.AddComponent<Camera>();
 
             currentCamera.orthographic = cameraData.Is2D;
+            currentCamera.backgroundColor = Color.black;
+            currentCamera.clearFlags = CameraClearFlags.SolidColor;
 
             cameraTransform = currentCamera.transform;
 
@@ -105,7 +108,7 @@ namespace CameraSystem
 
         private void SetUpTarget()
         {
-            targetToTrack = null;
+            targetToTrack = GameObject.Find(PLAYER_NAME).transform; // This can be improved upon
         }
 
         /// <summary>
@@ -119,41 +122,42 @@ namespace CameraSystem
                 return;
             }
 
-            TrackTarget();
+            //TrackTarget();
+
+            //No Async with heavy Task.Delay. Now we run a timer and letting it call the function. - Wesley
+            Timer timer = new Timer(cameraData.TrackTargetDelay);
+            timer.Elapsed += (sender, e) => TrackTarget();
+            timer.AutoReset = true;
+            timer.Start();
         }
 
         /// <summary>
         /// Uses a roundend position of the target to track if it has entered the current iterated area.
         /// </summary>
         /// <returns></returns>
-        private async void TrackTarget()
+        private void TrackTarget()
         {
-            while(Application.isPlaying)
+            for (int i = 0; i < cameraData.AvailableAreas.Count; i++)
             {
-                await Task.Delay(cameraData.TrackTargetDelay);
+                CameraArea iteratedArea = cameraData.AvailableAreas[i];
 
-                for (int i = 0; i < cameraData.AvailableAreas.Count; i++)
+                if (iteratedArea == currentArea)
                 {
-                    CameraArea iteratedArea = cameraData.AvailableAreas[i];
+                    continue;
+                }
 
-                    if (iteratedArea == currentArea)
-                    {
-                        continue;
-                    }
+                UpdateTargetPosition();
 
-                    UpdateTargetPosition();
+                if (currentTargetPosition == previousTargetPosition)
+                {
+                    continue;
+                }
 
-                    if (currentTargetPosition == previousTargetPosition)
-                    {
-                        continue;
-                    }
+                // Player moved towards new tile
 
-                    // Player moved towards new tile
-
-                    if (iteratedArea.Contains(currentTargetPosition))
-                    {
-                        InvokeAreaChange(iteratedArea);
-                    }
+                if (iteratedArea.Contains(currentTargetPosition))
+                {
+                    InvokeAreaChange(iteratedArea);
                 }
             }
         }
@@ -241,7 +245,7 @@ namespace CameraSystem
         {
             if (targetToTrack == null)
             {
-                Debug.LogWarning("There is no target to track!");
+                //Debug.LogWarning("There is no target to track!");
                 return;
             }
 
@@ -253,12 +257,17 @@ namespace CameraSystem
 
         public Vector3 CalculateFollowTreshold()
         {
+            if (currentCamera == null)
+            {
+                return Vector3.zero;
+            }
+
             Rect aspect = currentCamera.pixelRect;
             float orthographicSize = currentCamera.orthographicSize;
             Vector2 t = new Vector2(orthographicSize * aspect.width / aspect.height, orthographicSize);
 
-            t.x -= followOffset.x;
-            t.y -= followOffset.y;
+            t.x -= cameraData.FollowOffset.x;
+            t.y -= cameraData.FollowOffset.y;
 
             return t;
         }
