@@ -25,7 +25,7 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
 
     public Player()
     {
-        stats = new Stats(10, 100, 6, 1, Elements.NONE);
+        stats = new Stats(1, 100, 6, 1, Elements.NONE);
         Leveling = new Leveling(this);
     }
 
@@ -84,9 +84,9 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
 
     private void MouseInput()
     {
-        if (Input.GetMouseButtonDown(0)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(0, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
-        if (Input.GetMouseButtonDown(1)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(1, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
-        if (Input.GetMouseButtonDown(2)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(2, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
+        if (Input.GetMouseButtonDown(0)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(0, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition), stats));
+        if (Input.GetMouseButtonDown(1)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(1, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition), stats));
+        if (Input.GetMouseButtonDown(2)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(2, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition), stats));
     }
 
     private void UpdatePosition()
@@ -102,11 +102,6 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
         rigidBody.MovePosition(position);
     }
 
-    //public void SetMovementSpeed(float value)
-    //{
-    //    movementSpeed = value;
-    //}
-
     public Stats GetStats()
     {
         return stats;
@@ -118,11 +113,13 @@ public struct MouseClickEvent
     public int button;
     public Vector2 mousePosition;
     public Vector2 worldMousePosition;
+    public Stats stats;
 
-    public MouseClickEvent(int _button, Vector2 _mousePosition, Vector2 _worldMousePosition)
+    public MouseClickEvent(int _button, Vector2 _mousePosition, Vector2 _worldMousePosition, Stats _stats)
     {
         button = _button;
         mousePosition = _mousePosition;
         worldMousePosition = _worldMousePosition;
+        stats = _stats;
     }
 }

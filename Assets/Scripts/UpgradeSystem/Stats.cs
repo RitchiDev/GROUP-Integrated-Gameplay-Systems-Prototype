@@ -52,8 +52,5 @@ public class Stats
     private void ApplyModifier(Upgrade _upgrade)
     {
         statModifier = _upgrade.CreateStatModifier(statModifier);
-        
-        Debug.Log("[Stats] upgrade applied: " + _upgrade.name);
-        //Debug.Log("[Stats] " + GetSpeed());
     }
 }

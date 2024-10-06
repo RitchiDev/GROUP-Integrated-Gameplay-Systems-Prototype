@@ -1,4 +1,3 @@
-using PlaceHolder;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -99,7 +98,6 @@ public class Finish : GameBehaviour
 
     private void CloseGame()
     {
-        Debug.Log("Application QUIT");
         Application.Quit();
     }
 }

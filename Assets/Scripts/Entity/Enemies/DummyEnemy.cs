@@ -26,7 +26,7 @@ public class DummyEnemy : BaseEnemy
 
             if (Vector2.Distance(_mouseData.worldMousePosition, enemyObj.transform.position) <= enemySize * .5f)
             {
-                TakeDamage(1f);
+                TakeDamage(_mouseData.stats.GetDamage());
             }
         }
     }
