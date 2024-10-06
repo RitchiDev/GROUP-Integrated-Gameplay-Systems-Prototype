@@ -121,10 +121,6 @@ public class UpgradeSystem : GameBehaviour
 
     private void OnLevelUp(LevelUpData _data)
     {
-        Debug.Log($"target: {_data.target}");
-        Debug.Log($"newLevel: {_data.newLevel}");
-        Debug.Log($"currentLevel:{_data.currentLevel}");
-
         int count = _data.newLevel - _data.currentLevel;
 
         levelText.text = "lv:" + _data.newLevel.ToString();
@@ -134,7 +130,6 @@ public class UpgradeSystem : GameBehaviour
         for(int i = 0; i < count; i++)
         {
             choices.Enqueue(_data.target);
-            Debug.Log("Enqueued");
         }
 
         OfferChoice(choices.Peek());

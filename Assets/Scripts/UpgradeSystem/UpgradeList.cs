@@ -18,7 +18,6 @@ public class UpgradeList : GameBehaviour
         }
 
         upgrades = Resources.LoadAll<Upgrade>("Upgrades");
-        Debug.Log($"upgrades list: {upgrades.Length}");
     }
 
     public Upgrade GetUpgrade(string _name)

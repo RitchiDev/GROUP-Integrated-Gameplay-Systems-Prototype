@@ -100,11 +100,6 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
         rigidBody.MovePosition(position);
     }
 
-    //public void SetMovementSpeed(float value)
-    //{
-    //    movementSpeed = value;
-    //}
-
     public Stats GetStats()
     {
         return stats;

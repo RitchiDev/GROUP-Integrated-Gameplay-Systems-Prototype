@@ -96,7 +96,6 @@ public class Finish : GameBehaviour
 
     private void CloseGame()
     {
-        Debug.Log("Application QUIT");
         Application.Quit();
     }
 }
