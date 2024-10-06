@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questOrder:
   - {fileID: 11400000, guid: 812708e83156eba42bf69598265efef3, type: 2}
-  - {fileID: 11400000, guid: 45315967b743be64bbda592518958d4d, type: 2}
+  - {fileID: 11400000, guid: dac527ec31bf9d047b9927e48bb0d660, type: 2}
+  - {fileID: 11400000, guid: bfec56dde225cdf4e9fb9a1807fe5d9e, type: 2}
   nextQuest:
   - {fileID: 11400000, guid: a84bade083e04a5428dd0d064f320e14, type: 2}
   questName: First Quest

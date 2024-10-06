@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0918f88e5b3bf6f4190a40f8449a2865, type: 3}
-  m_Name: PressKey
+  m_Name: KillStart
   m_EditorClassIdentifier: 
-  questType: 0
-  questValue: 3
-  actionCount: 5
+  questType: 2
+  questValue: 1
+  actionCount: 2

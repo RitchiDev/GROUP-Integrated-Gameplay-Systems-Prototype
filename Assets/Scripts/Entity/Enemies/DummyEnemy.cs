@@ -15,6 +15,7 @@ public class DummyEnemy : BaseEnemy
         enemyObj = GameObject.Instantiate(dummyObj, _position, Quaternion.identity);
         health = _health;
         deathXP = 10;
+        enemyType = 1;
     }
 
     public override void Clicked(MouseClickEvent _mouseData)
