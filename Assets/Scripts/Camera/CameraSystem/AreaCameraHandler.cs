@@ -80,6 +80,8 @@ namespace CameraSystem
             currentCamera = cameraObject.AddComponent<Camera>();
 
             currentCamera.orthographic = cameraData.Is2D;
+            currentCamera.backgroundColor = Color.black;
+            currentCamera.clearFlags = CameraClearFlags.SolidColor;
 
             cameraTransform = currentCamera.transform;
 
