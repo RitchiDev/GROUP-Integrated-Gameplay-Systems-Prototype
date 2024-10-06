@@ -1,3 +1,4 @@
+using PlaceHolder;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,16 +12,17 @@ public class Finish : GameBehaviour
     private Vector2 finishPos;
     private Vector2 playerPos;
     private GameObject instance;
+    private Player player;
 
     // variables
     private float distanceFromFinish = 3f;
 
     private float timer;
-    private float checkForPlayerInterval = 1f;
+    private float checkForPlayerInterval = .75f;
 
     private Button quitButton;
 
-    public Finish()
+    public override void Start()
     {
         FinishSetup();
     }
@@ -51,6 +53,7 @@ public class Finish : GameBehaviour
     private void FinishSetup()
     {
         finishPos = new Vector2(74, 16);
+        player = Game.GetObjectOfType<Player>();
 
         GameObject finishPrefab = Resources.Load<GameObject>("Finish");
 
@@ -60,7 +63,7 @@ public class Finish : GameBehaviour
 
     private bool CheckForPlayer()
     {
-
+        playerPos = player.player.transform.position;
         float distance = Vector2.Distance(playerPos, finishPos);
 
         if(distance <= distanceFromFinish) { return true; }

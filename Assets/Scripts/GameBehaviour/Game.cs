@@ -99,4 +99,17 @@ public class Game
         gameBehaviours.Add(_gameBehaviour);
         _gameBehaviour.OnDispose += BehaviourDisposed;
     }
+
+    public static T GetObjectOfType<T>() where T : class
+    {
+        foreach (IGameBehaviour bH in gameBehaviours)
+        {
+            if (bH.GetType() == (typeof(T)))
+            {
+                return bH as T;
+            }
+        }
+
+        return null;
+    }
 }
