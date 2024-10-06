@@ -21,6 +21,8 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
     public ILeveling Leveling { get; private set; }
     private Camera cam;
 
+    public GameObject player;
+
     public Player()
     {
         stats = new Stats(1, 100, 6, 1, Elements.NONE);
@@ -55,7 +57,7 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
     private void Initialize()
     {
         GameObject playerPrefab = Resources.Load<GameObject>(PREFAB_NAME);
-        GameObject player = GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        player = GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player.name = PREFAB_NAME;
 
         rigidBody = player.GetComponent<Rigidbody2D>();
