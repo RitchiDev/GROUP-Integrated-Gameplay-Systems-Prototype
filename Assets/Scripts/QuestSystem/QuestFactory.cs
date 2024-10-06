@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public static class QuestFactory
 {
-    private static KeyCode[] keys =
+    public static KeyCode[] Keys =
     {
         KeyCode.A,
         KeyCode.B,
@@ -63,9 +63,11 @@ public static class QuestFactory
         switch (_rndQuest)
         {
             case QuestType.RANDOM_KEYCODE:
-                return new KeyPressQuest(keys[Random.Range(0, keys.Length)], Random.Range(2, 12));
+                return new KeyPressQuest(Keys[Random.Range(0, Keys.Length)], Random.Range(2, 12));
             case QuestType.RANDOM_MOUSE_BUTTON:
                 return new MousePressQuest(Random.Range(0, 3), Random.Range(2, 12));
+            case QuestType.RANDOM_ENEMY:
+                return new KillEnemyQuest(1, Random.Range(0, 2));
             default:
                 Debug.LogError("Quest Type not found.");
                 return null;
