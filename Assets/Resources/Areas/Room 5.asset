@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab470ae87f88ac4b80924e981bd3a99, type: 3}
+  m_Name: Room 5
+  m_EditorClassIdentifier: 
+  cameraState: {fileID: 11400000, guid: 741b452a5561cce44919241373acb845, type: 2}
+  cameraSize: 7
+  minimumBoundary: {x: 31, y: 7, z: 0}
+  maximumBoundary: {x: 62, y: 18, z: 0}
+  isIgnoringActiveScenes: 0
+  labelColor: {r: 1, g: 1, b: 1, a: 1}
+  areaColor: {r: 1, g: 1, b: 1, a: 1}
+  scenesActiveIn: 01000000

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24fa05b2d2de64f4da6e34243d6f83a1, type: 3}
+  m_Name: FirstQuest
+  m_EditorClassIdentifier: 
+  questOrder:
+  - {fileID: 11400000, guid: 812708e83156eba42bf69598265efef3, type: 2}
+  - {fileID: 11400000, guid: dac527ec31bf9d047b9927e48bb0d660, type: 2}
+  - {fileID: 11400000, guid: bfec56dde225cdf4e9fb9a1807fe5d9e, type: 2}
+  nextQuest:
+  - {fileID: 11400000, guid: a84bade083e04a5428dd0d064f320e14, type: 2}
+  questName: First Quest
+  xpOnComplete: 25
