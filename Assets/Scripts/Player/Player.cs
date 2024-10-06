@@ -19,6 +19,7 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
     private Stats stats;
     public Stats CurrentStats => stats;
     public ILeveling Leveling { get; private set; }
+    private Camera cam;
 
     public Player()
     {
@@ -29,6 +30,11 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
     public override void Awake()
     {
         Initialize();
+    }
+
+    public override void Start()
+    {
+        cam = GameObject.FindAnyObjectByType<Camera>();
     }
 
     public override void Update()
@@ -76,9 +82,9 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
 
     private void MouseInput()
     {
-        if (Input.GetMouseButtonDown(0)) EventSystem<int>.InvokeEvent(EventType.MOUSE_CLICKED, 0);
-        if (Input.GetMouseButtonDown(1)) EventSystem<int>.InvokeEvent(EventType.MOUSE_CLICKED, 1);
-        if (Input.GetMouseButtonDown(2)) EventSystem<int>.InvokeEvent(EventType.MOUSE_CLICKED, 2);
+        if (Input.GetMouseButtonDown(0)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(0, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
+        if (Input.GetMouseButtonDown(1)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(1, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
+        if (Input.GetMouseButtonDown(2)) EventSystem<MouseClickEvent>.InvokeEvent(EventType.MOUSE_CLICKED, new MouseClickEvent(2, Input.mousePosition, cam.ScreenToWorldPoint(Input.mousePosition)));
     }
 
     private void UpdatePosition()
@@ -102,5 +108,19 @@ public class Player : GameBehaviour, IStatHolder, ILevelHolder
     public Stats GetStats()
     {
         return stats;
+    }
+}
+
+public struct MouseClickEvent
+{
+    public int button;
+    public Vector2 mousePosition;
+    public Vector2 worldMousePosition;
+
+    public MouseClickEvent(int _button, Vector2 _mousePosition, Vector2 _worldMousePosition)
+    {
+        button = _button;
+        mousePosition = _mousePosition;
+        worldMousePosition = _worldMousePosition;
     }
 }
