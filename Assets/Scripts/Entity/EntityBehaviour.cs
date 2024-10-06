@@ -3,10 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// If your class is a base class of GameBehaviour. The Game will automatically create it and running awake and start. Also runs the update loop.
-/// </summary>
-public class GameBehaviour : IGameBehaviour
+public class EntityBehaviour : IGameBehaviour
 {
     public event Action<IGameBehaviour> OnDispose;
 
@@ -17,14 +14,11 @@ public class GameBehaviour : IGameBehaviour
     public virtual void Update() { }
 
     public virtual void FixedUpdate() { }
-
-    public virtual void LateUpdate() { }
-
+    public void LateUpdate() { }
     protected void Dispose()
     {
         OnDispose?.Invoke(this);
         OnDispose = null;
-
         OnDestroy();
     }
 

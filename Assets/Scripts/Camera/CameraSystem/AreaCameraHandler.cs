@@ -37,10 +37,13 @@ namespace CameraSystem
         private CameraArea currentArea;
         public CameraArea CurrentArea => currentArea;
 
-        public override void Start()
+        public override void Awake()
         {
             SetUp();
+        }
 
+        public override void Start()
+        {
             StartTracking();
         }
 

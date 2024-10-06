@@ -15,6 +15,10 @@ public enum EventType
 
     // Upgrade events
     UPGRADE_AQCUIRED = 5,
+
+    //Entity Events
+    ENTITY_DAMAGE = 6,
+    ENTITY_DIED = 7
 }
 public static class EventSystem
 {

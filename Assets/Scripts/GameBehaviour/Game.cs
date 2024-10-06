@@ -34,11 +34,12 @@ public class Game
                 gB.OnDispose += BehaviourDisposed;
             }
 
+            List<IGameBehaviour> copyBehaviour = gameBehaviours.ToList();
             //Awake before start.
-            gameBehaviours.ForEach(gB => gB.Awake());
+            copyBehaviour.ForEach(gB => gB.Awake());
 
             //Start after awake.
-            gameBehaviours.ForEach(gB => gB.Start());
+            copyBehaviour.ForEach(gB => gB.Start());
 
             UpdateLoop();
             FixedUpdateLoop();
