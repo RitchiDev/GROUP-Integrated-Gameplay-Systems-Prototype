@@ -68,20 +68,12 @@ public class Leveling : ILeveling
         // or single function - Credits to my brother
         int newLevel = Mathf.FloorToInt((-37.5f + Mathf.Sqrt(1406.25f + (50f * currentExp))) / 25);
 
-        Debug.Log("[Experience] New level: " +  newLevel);
-        //int newLevel = (int)(currentExp / expNeeded);
-
         EventSystem<ExperienceData>.InvokeEvent(EventType.EXP_GAINED, new ExperienceData(owner, currentExp, GetTotalExperienceNeeded(newLevel + 1), GetTotalExperienceNeeded(newLevel)));
 
         if (currentLevel < newLevel)
         {
             LevelUp(newLevel);
         }
-
-        Debug.Log("[Leveling] Adding experience ---------------- ");
-        Debug.Log("[Leveling] new Exp: " + currentExp);
-        Debug.Log("[Leveling] added Exp: " + _experience * owner.GetStats().GetExperienceBoost());
-        Debug.Log("[Leveling] ----------------------------------");
     }
 
     // remove exp (Can not go down a level)
@@ -95,7 +87,6 @@ public class Leveling : ILeveling
     public void LevelUp(int _newLevel)
     {
         EventSystem<LevelUpData>.InvokeEvent(EventType.EXP_LEVELUP , new LevelUpData(owner, _newLevel, currentLevel));
-        Debug.Log("[Leveling] Leveling up! lv: " + _newLevel);
 
         currentLevel = _newLevel;
     }

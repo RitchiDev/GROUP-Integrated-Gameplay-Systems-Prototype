@@ -27,7 +27,6 @@ public class UpgradeList : GameBehaviour
             if(upgrade.name == _name) {  return upgrade; }
         }
 
-        Debug.LogWarning($"Could not find upgrade with name: {_name} ");
         return null;
     }
 

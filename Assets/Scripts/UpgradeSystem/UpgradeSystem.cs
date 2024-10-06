@@ -98,7 +98,6 @@ public class UpgradeSystem : GameBehaviour
         expFill.rectTransform.anchorMin = new Vector2(0, 0);
         expFill.rectTransform.anchorMax = new Vector2(1, .8f);
         Sprite defaultSprite = Resources.Load<Sprite>("Sprites/DefaultSprite");
-        if (defaultSprite == null) { Debug.Log("DefaultSprite is null"); }
         expFill.sprite = defaultSprite;
         expFill.type = Image.Type.Filled;
         expFill.fillMethod = Image.FillMethod.Horizontal;
@@ -124,8 +123,6 @@ public class UpgradeSystem : GameBehaviour
         int count = _data.newLevel - _data.currentLevel;
 
         levelText.text = "lv:" + _data.newLevel.ToString();
-
-        Debug.Log(count);
 
         for(int i = 0; i < count; i++)
         {

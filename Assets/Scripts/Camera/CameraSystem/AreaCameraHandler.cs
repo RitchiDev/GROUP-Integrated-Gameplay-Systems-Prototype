@@ -172,7 +172,6 @@ namespace CameraSystem
         {
             if (cameraTransform == null)
             {
-                //Debug.LogWarning("no Camera transform has been assigned!");
                 return;
             }
 
@@ -248,7 +247,6 @@ namespace CameraSystem
         {
             if (targetToTrack == null)
             {
-                //Debug.LogWarning("There is no target to track!");
                 return;
             }
 
