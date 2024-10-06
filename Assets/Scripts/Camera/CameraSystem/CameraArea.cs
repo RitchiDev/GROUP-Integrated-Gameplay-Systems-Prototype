@@ -44,7 +44,6 @@ namespace CameraSystem
         {
             SceneView.duringSceneGui += OnSceneUpdate;
         }
-#endif
 
         private void OnDisable()
         {
@@ -64,6 +63,7 @@ namespace CameraSystem
                 }
             }
         }
+#endif
 
         public void OnEnter()
         {
