@@ -19,10 +19,9 @@ namespace CameraSystem
         private const string DATA_NAME = "CameraData";
 
         [Header("Camera")]
-        [SerializeField] private Camera currentCamera;
-        [SerializeField] private Transform cameraTransform;
+        private Camera currentCamera;
+        private Transform cameraTransform;
         public Transform CameraTransform => cameraTransform;
-        [SerializeField] private Vector3 followOffset;
         private Dictionary<CameraArea, Action> changeAreaDictionary = new Dictionary<CameraArea, Action>();
         private Vector3 newCameraPosition;
         public Vector3 CurrentNewCameraPosition => newCameraPosition;
@@ -32,6 +31,7 @@ namespace CameraSystem
         public Transform Target => targetToTrack;
         private Vector3Int currentTargetPosition;
         private Vector3Int previousTargetPosition;
+        private const string PLAYER_NAME = "Player";
 
         [Header("Area")]
         private CameraArea currentArea;
@@ -80,6 +80,8 @@ namespace CameraSystem
             currentCamera = cameraObject.AddComponent<Camera>();
 
             currentCamera.orthographic = cameraData.Is2D;
+            currentCamera.backgroundColor = Color.black;
+            currentCamera.clearFlags = CameraClearFlags.SolidColor;
 
             cameraTransform = currentCamera.transform;
 
@@ -106,7 +108,7 @@ namespace CameraSystem
 
         private void SetUpTarget()
         {
-            targetToTrack = null;
+            targetToTrack = GameObject.Find(PLAYER_NAME).transform; // This can be improved upon
         }
 
         /// <summary>
@@ -255,12 +257,17 @@ namespace CameraSystem
 
         public Vector3 CalculateFollowTreshold()
         {
+            if (currentCamera == null)
+            {
+                return Vector3.zero;
+            }
+
             Rect aspect = currentCamera.pixelRect;
             float orthographicSize = currentCamera.orthographicSize;
             Vector2 t = new Vector2(orthographicSize * aspect.width / aspect.height, orthographicSize);
 
-            t.x -= followOffset.x;
-            t.y -= followOffset.y;
+            t.x -= cameraData.FollowOffset.x;
+            t.y -= cameraData.FollowOffset.y;
 
             return t;
         }
